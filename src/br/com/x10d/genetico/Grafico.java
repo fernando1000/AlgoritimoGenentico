@@ -12,9 +12,11 @@ import org.jfree.ui.ApplicationFrame;
 
 public class Grafico extends ApplicationFrame {
 
+	private static final long serialVersionUID = -6492952364680195103L;
+	
 	private List<Individuo> melhoresCromossomos = new ArrayList<>();
 
-	public Grafico(String tituloJanela, String tituloGrafico, List melhores) {
+	public Grafico(String tituloJanela, String tituloGrafico, List<Individuo> melhores) {
 		super(tituloJanela);
 		this.melhoresCromossomos = melhores;
 		JFreeChart graficoLinha = ChartFactory.createLineChart(tituloGrafico, "Geracao", "Valor", carregarDados(),

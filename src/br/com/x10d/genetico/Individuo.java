@@ -8,15 +8,16 @@ import lombok.Data;
 @Data
 public class Individuo implements Comparable<Individuo> {
 
-	private List espacos = new ArrayList<>();
-	private List valores = new ArrayList<>();
+	private List<Double> espacos = new ArrayList<>();
+	private List<Double> valores = new ArrayList<>();
 	private Double limiteEspacos;
 	private Double notaAvaliacao;
 	private Double espacoUsado;
 	private int geracao;
-	private List cromossomo = new ArrayList<>();
+	private List<String> cromossomo = new ArrayList<>();
 
-	public Individuo(List espacos, List valores, Double limiteEspacos) {
+	public Individuo(List<Double> espacos, List<Double> valores, Double limiteEspacos) {
+		
 		this.espacos = espacos;
 		this.valores = valores;
 		this.limiteEspacos = limiteEspacos;
@@ -34,6 +35,7 @@ public class Individuo implements Comparable<Individuo> {
 	}
 
 	public void avaliacao() {
+		
 		Double nota = 0.0;
 		Double somaEspacos = 0.0;
 		for (int i = 0; i < this.cromossomo.size(); i++) {
@@ -51,13 +53,14 @@ public class Individuo implements Comparable<Individuo> {
 		this.espacoUsado = somaEspacos;
 	}
 
-	public List crossover(Individuo outroIndividuo) {
+	public List<Individuo> crossover(Individuo outroIndividuo) {
+		
 		int corte = (int) Math.round(Math.random() * this.cromossomo.size());
-		List filho1 = new ArrayList<>();
+		List<String> filho1 = new ArrayList<>();
 		filho1.addAll(outroIndividuo.getCromossomo().subList(0, corte));
 		filho1.addAll(this.cromossomo.subList(corte, this.cromossomo.size()));
 
-		List filho2 = new ArrayList<>();
+		List<String> filho2 = new ArrayList<>();
 		filho2.addAll(this.cromossomo.subList(0, corte));
 		filho2.addAll(outroIndividuo.getCromossomo().subList(corte, this.cromossomo.size()));
 
@@ -74,6 +77,7 @@ public class Individuo implements Comparable<Individuo> {
 	}
 
 	public Individuo mutacao(Double taxaMutacao) {
+		
 		// System.out.println("Antes da mutação: " + this.cromossomo);
 		for (int i = 0; i < this.cromossomo.size(); i++) {
 			if (Math.random() < taxaMutacao) {
@@ -90,6 +94,7 @@ public class Individuo implements Comparable<Individuo> {
 	
 	@Override
 	public int compareTo(Individuo o) {
+		
 		if (this.notaAvaliacao > o.getNotaAvaliacao()) {
 			return -1;
 		}
